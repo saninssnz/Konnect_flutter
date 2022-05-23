@@ -176,7 +176,9 @@ class _CallPageState extends State<CallPage> {
   List<Widget> _getRenderViews() {
     final List<StatefulWidget> list = [];
     list.add(RtcLocalView.SurfaceView());
-    _users.forEach((int uid) => list.add(RtcRemoteView.SurfaceView(uid: uid,channelId:widget.channelId)));
+    for (var uid in _users) {
+      list.add(RtcRemoteView.SurfaceView(uid: uid,channelId:widget.channelId));
+    }
     return list;
   }
 
