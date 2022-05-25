@@ -13,16 +13,19 @@ class _MyHomePageState extends State<MyHomePage> {
   final myController = TextEditingController();
   final myId = TextEditingController();
   bool _validateError = false;
+  final Shader linearGradient = LinearGradient(
+    colors: <Color>[Color(0xffDA44bb), Color(0xff8921aa)],
+  ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.orange,
-        centerTitle: true,
-        title: Text('Agora Video Call Demo'),
-        elevation: 0,
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.orange,
+      //   centerTitle: true,
+      //   title: Text('Video Call Demo'),
+      //   elevation: 0,
+      // ),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -32,15 +35,13 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  child: Image.asset('assets/agora-logo.png'),
-                  height: MediaQuery.of(context).size.height * 0.1,
-                ),
-                Padding(padding: EdgeInsets.only(top: 20)),
+                Image.asset('assets/konnect.png',height: 150,),
+                Padding(padding: EdgeInsets.only(top: 0)),
                 Text(
-                  'Agora Video Call Demo',
+                  'Konnect with the world',
                   style: TextStyle(
-                      color: Colors.orange,
+                      foreground: Paint()..shader = linearGradient,
+                      // color: Colors.indigo[900],
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
@@ -51,80 +52,73 @@ class _MyHomePageState extends State<MyHomePage> {
                     controller: myId,
                     decoration: InputDecoration(
                       labelText: 'Channel Id',
-                      labelStyle: TextStyle(color: Colors.orange),
-                      hintText: 'test',
+                      labelStyle: TextStyle(color: Colors.purple),
+                      hintText: 'Enter Channel Id',
                       hintStyle: TextStyle(color: Colors.black45),
-                      errorText:
-                      _validateError ? 'Channel Id is mandatory' : null,
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.orange),
+                        borderSide: BorderSide(color: Colors.purple),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.orange),
+                        borderSide: BorderSide(color: Colors.purple),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       disabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.orange),
+                        borderSide: BorderSide(color: Colors.purple),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.orange),
+                        borderSide: BorderSide(color: Colors.purple),
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
                   ),
                 ),
-                Padding(padding: EdgeInsets.symmetric(vertical: 20)),
+                Padding(padding: EdgeInsets.symmetric(vertical: 8)),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: TextFormField(
                     controller: myController,
                     decoration: InputDecoration(
                       labelText: 'Channel Name',
-                      labelStyle: TextStyle(color: Colors.orange),
-                      hintText: 'test',
+                      labelStyle: TextStyle(color: Colors.purple),
+                      hintText: 'Enter Channel Name',
                       hintStyle: TextStyle(color: Colors.black45),
-                      errorText:
-                      _validateError ? 'Channel name is mandatory' : null,
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.orange),
+                        borderSide: BorderSide(color: Colors.purple),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.orange),
+                        borderSide: BorderSide(color: Colors.purple),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       disabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.orange),
+                        borderSide: BorderSide(color: Colors.purple),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.orange),
+                        borderSide: BorderSide(color: Colors.purple),
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
                   ),
                 ),
-                Padding(padding: EdgeInsets.symmetric(vertical: 30)),
+                Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.25,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: MaterialButton(
-                    onPressed: onJoin,
+                    shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    onPressed:onJoin,
                     height: 40,
-                    color: Colors.orange,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Join',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                        ),
-                      ],
+                    color: Colors.purple,
+                    child: Text(
+                      'Join',
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 )

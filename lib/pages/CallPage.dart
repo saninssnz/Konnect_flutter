@@ -19,6 +19,7 @@ class _CallPageState extends State<CallPage> {
   static final _users = <int>[];
   final _infoStrings = <String>[];
   bool muted = false;
+  bool enableVideo = true;
   RtcEngine? _engine;
 
   @override
@@ -111,7 +112,20 @@ class _CallPageState extends State<CallPage> {
       padding: const EdgeInsets.symmetric(vertical: 48),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
+          RawMaterialButton(
+            onPressed: _onToggleVideo,
+            child: Icon(
+              enableVideo ? Icons.videocam : Icons.videocam_off,
+              color: enableVideo ? Colors.white : Colors.blueAccent,
+              size: 20.0,
+            ),
+            shape: CircleBorder(),
+            elevation: 2.0,
+            fillColor: enableVideo ? Colors.blueAccent : Colors.white,
+            padding: const EdgeInsets.all(12.0),
+          ),
           RawMaterialButton(
             onPressed: _onToggleMute,
             child: Icon(
@@ -147,6 +161,20 @@ class _CallPageState extends State<CallPage> {
             elevation: 2.0,
             fillColor: Colors.white,
             padding: const EdgeInsets.all(12.0),
+          ),
+          RawMaterialButton(
+            onPressed: (){
+
+            },
+            child: Icon(
+              Icons.switch_camera,
+              color: Colors.blueAccent,
+              size: 20.0,
+            ),
+            shape: CircleBorder(),
+            elevation: 2.0,
+            fillColor: Colors.white,
+            padding: const EdgeInsets.all(12.0),
           )
         ],
       ),
@@ -156,15 +184,17 @@ class _CallPageState extends State<CallPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Agora Group Video Calling'),
-        backgroundColor: Colors.orange,
-      ),
       backgroundColor: Colors.black,
       body: Center(
         child: Stack(
           children: <Widget>[
-            _viewRows(),
+            enableVideo?
+            _viewRows():
+                Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.white,
+                ),
             _toolbar(),
           ],
         ),
@@ -244,6 +274,21 @@ class _CallPageState extends State<CallPage> {
       muted = !muted;
     });
     _engine?.muteLocalAudioStream(muted);
+  }
+
+  void _onToggleVideo() {
+    if(enableVideo){
+      _engine?.disableVideo();
+      enableVideo = false;
+    }
+    else{
+      _engine?.enableVideo();
+      enableVideo = true;
+    }
+
+    setState(() {
+    });
+
   }
 
   void _onSwitchCamera() {
